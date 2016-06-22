@@ -1,27 +1,27 @@
 package org.apprenda.common;
 
 public class Coordinate2D implements Comparable<Coordinate2D>,Cloneable{
-    private long x;
-    private long y;
+    private double x;
+    private double y;
     
-    public Coordinate2D(long x, long y){
+    public Coordinate2D(double x, double y){
         this.x=x;
         this.y=y;
     }
 
-    public long getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(long x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public long getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(long y) {
+    public void setY(double y) {
         this.y = y;
     }
 
@@ -38,11 +38,14 @@ public class Coordinate2D implements Comparable<Coordinate2D>,Cloneable{
             return (int)(this.y-o.y);
         }
     }
-    
-    public boolean equals(Coordinate2D b){
+    @Override
+    public boolean equals(Object b){
         if(b==null)
             return false;
-        return this.x==b.x && this.y==b.y;
+        if(!Coordinate2D.class.isAssignableFrom(b.getClass()))
+            return false;
+        Coordinate2D point=(Coordinate2D)b;
+        return this.x==point.x && this.y==point.y;
     }
     @Override
     public int hashCode(){

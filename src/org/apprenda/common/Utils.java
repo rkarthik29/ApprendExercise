@@ -8,9 +8,7 @@ public class Utils {
                 ((b.getY() - a.getY()) * (c.getX() - a.getX()));
     }
     
-    public static boolean isCCW(Coordinate2D a,Coordinate2D b, Coordinate2D c){
-        /*
-
+    public static int isCCW(Coordinate2D a,Coordinate2D b, Coordinate2D c){
          if (getArea(a, b, c) >0){
            return 1;
           }else if(getArea(a, b, c) <0){
@@ -18,8 +16,8 @@ public class Utils {
           }else{
              return 0;
           }
-         */
-        return getArea(a, b, c) >0;
+         
+        //return getArea(a, b, c) >0;
     }
     
     public static double polarAngle(Coordinate2D a,Coordinate2D b){

@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Stack;
 
 import org.apprenda.common.Coordinate2D;
+import org.apprenda.common.Line;
 import org.apprenda.common.Utils;
 
 public class Polygon {
@@ -24,13 +25,11 @@ public class Polygon {
         return coordinates;
     }
 
-
-
-    public void setCoordinates(ArrayList<Coordinate2D> coordinates) {
+    public void setCoordinates(ArrayList<Coordinate2D> coordinates){
         this.coordinates = coordinates;
     }
 
-
+    
 
     public final Polygon getConvexHull(ArrayList<Coordinate2D> points2d){
         
@@ -81,9 +80,6 @@ public class Polygon {
         for(Coordinate2D point2d:hull){
             hullList.add(point2d);
         }
-        for(Coordinate2D point2d:hullList){
-            System.out.println(point2d);
-        }
         return new Polygon(hullList);
      }
     
@@ -105,17 +101,90 @@ public class Polygon {
 
     }
     
-    /*public final Coordinate2D[] intersects(Polygon a){
-        ArrayList<Coordinate2D> points2d= new ArrayList<Coordinate2D>();
-        points2d.addAll(this.getCoordinates());
-        Polygon polygon1=this.getEdges(points2d);
-        
-    }*/
+    private ArrayList<Line> getEdges(ArrayList<Coordinate2D> points2d){
+        ArrayList<Line> edges = new ArrayList<Line>();
+        Polygon polygon = getConvexHull(points2d);
+        if(polygon==null){
+            return edges;
+        }
+        for(int i=0;i<polygon.coordinates.size();i++){
+            if(i<polygon.coordinates.size()-1)
+                edges.add(new Line(polygon.coordinates.get(i),polygon.coordinates.get(i+1)));
+            else
+                edges.add(new Line(polygon.coordinates.get(i),polygon.coordinates.get(0)));
+        }
+        return edges;   
+    }
+    public final boolean isIntesecting(Polygon a){
+        if(a==null)
+            return false;
+        if(this.contains(a) || a.contains(this))
+            return false;
+        if(this.isAdjacent(a))
+            return false;
+        if(this.findIntersects(a).size()<2)
+            return false;
+        else
+            return true;
+    }
     
-    public boolean equals(Polygon a){
+    public final  ArrayList<Coordinate2D> findIntersects(Polygon a){
+        ArrayList<Coordinate2D> iPoints= new ArrayList<Coordinate2D>();
+        if(a==null)
+            return iPoints;
+        ArrayList<Coordinate2D> pointsA= new ArrayList<Coordinate2D>();
+        ArrayList<Coordinate2D> pointsB= new ArrayList<Coordinate2D>();
+        
+        pointsB.addAll(this.getCoordinates());
+        pointsA.addAll(a.getCoordinates());
+        ArrayList<Line> edgesB=this.getEdges(pointsB);
+        ArrayList<Line> edgesA=this.getEdges(pointsA);
+        for(Line edgeA:edgesA){
+            for(Line edgeB:edgesB){
+               //System.out.println(edgeA+"--"+edgeB);
+               Coordinate2D point= edgeA.intersects(edgeB);
+               //System.out.println(point);
+               if(point!=null && !iPoints.contains(point))
+                   iPoints.add(point);
+            }
+        }
+        //for(Coordinate2D point:iPoints)
+        //    System.out.println(point);
+        return iPoints;
+
+    }
+    
+    public final boolean isAdjacent(Polygon b){
+        if(b==null)
+            return false;
+        if(this.contains(b) || b.contains(this))
+            return false;
+        ArrayList<Coordinate2D> iPoints= new ArrayList<Coordinate2D>();
+        
+        ArrayList<Coordinate2D> pointsA= new ArrayList<Coordinate2D>();
+        ArrayList<Coordinate2D> pointsB= new ArrayList<Coordinate2D>();
+        
+        pointsA.addAll(this.getCoordinates());
+        pointsB.addAll(b.getCoordinates());
+        ArrayList<Line> edgesB=this.getEdges(pointsB);
+        ArrayList<Line> edgesA=this.getEdges(pointsA);
+        for(Line edgeA:edgesA){
+            for(Line edgeB:edgesB){
+               //System.out.println(edgeA+"--"+edgeB);
+              if( edgeA.colinear(edgeB))
+                  return true;
+            }
+        }
+        return false;
+    }
+    
+    public boolean equals(Object a){
         if(a==null){
             return false;
+        }else if(!Polygon.class.isAssignableFrom(a.getClass())){
+            return false;
         }else{
+            Polygon p =(Polygon)a;
             this.coordinates.sort(new Comparator<Coordinate2D>() {
                 @Override
                 public int compare(Coordinate2D arg0, Coordinate2D arg1) {
@@ -128,7 +197,7 @@ public class Polygon {
 
             });
             
-            a.coordinates.sort(new Comparator<Coordinate2D>() {
+            p.coordinates.sort(new Comparator<Coordinate2D>() {
                 @Override
                 public int compare(Coordinate2D arg0, Coordinate2D arg1) {
                     if(arg0.getY()==arg1.getY()){
@@ -140,9 +209,9 @@ public class Polygon {
 
             });
             
-            if(a.coordinates.size()==this.coordinates.size()){
+            if(p.coordinates.size()==this.coordinates.size()){
                 for(int i=0;i<this.coordinates.size();i++){
-                    if(! this.coordinates.get(i).equals(a.coordinates.get(i)))
+                    if(! this.coordinates.get(i).equals(p.coordinates.get(i)))
                         return false;
                 }
                 return true;
