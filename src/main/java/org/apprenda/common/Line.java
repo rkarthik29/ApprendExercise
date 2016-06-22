@@ -96,6 +96,8 @@ public class Line {
     public boolean colinear(Line l){
         if(l==null)
             return false;
+        if(this.equals(l))
+            return true;
         if(this.start.equals(l.start)||this.start.equals(l.end)
                 ||this.end.equals(l.start)||this.end.equals(l.end))
             return false;

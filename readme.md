@@ -1,6 +1,7 @@
 Code submission for the Rectangles exercise.
 
-The purpose of the program is to be able to identify polygon features. The algorithm identifies the following features. A rectangle is a special case of a polygon where the opposite sides are equal and parallel. It also assumes that the polygon can have any orientation and not necessary be parallel to the x-axis.
+The purpose of the program is to be able to identify polygon features. The algorithm identifies the following features. A rectangle is a special case of a polygon where the opposite sides are equal and parallel. It also assumes that the polygon can have any orientation and not necessary be parallel to the x-axis.All logic have been implemented with a Base Polygon Class, which will allow user to apply this logic on most polygonal shapes (triangle, pentagon).
+The Rectangle class is created as a helper class to easily create a rectangle. Other classes can be created in a similar way to represent other polygons. 
 
 1. Containment :- The algorithm uses the convex hull algorithm to find out if one rectangle completely contains another rectangle.a.contains(b), where a and b are two convex polygons, will be true if all points of b are inside rectangle b. To calculate this, we get the Convex hull of all points of polygon a and then we get the convex hull of points of a and b. If the polygon formed the convexhull of a and the convexhull of a and b are equal, the b is completely contained in a.
 
