@@ -35,3 +35,4 @@ target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.l
 target/surefire-reports/org.apprenda.test.RectangleTest.txt
 
 target/surefire-reports/TEST-org.apprenda.test.RectangleTest.xml
+/target/
