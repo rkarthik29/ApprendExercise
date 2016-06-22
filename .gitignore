@@ -26,3 +26,12 @@ bin/org/apprenda/oriented/Polygon$3.class
 bin/org/apprenda/oriented/Polygon$4.class
 
 bin/org/apprenda/oriented/Rectangle.class
+/bin/
+
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+
+*.lst
+
+target/surefire-reports/org.apprenda.test.RectangleTest.txt
+
+target/surefire-reports/TEST-org.apprenda.test.RectangleTest.xml

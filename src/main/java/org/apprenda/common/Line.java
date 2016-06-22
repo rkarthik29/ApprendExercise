@@ -18,7 +18,7 @@ public class Line {
         }
     }
     
-    public Coordinate2D intersects(Line l){
+    public Coordinate2D intersects(Line l,boolean proper){
         if(l==null)
             return null;
         /*
@@ -44,19 +44,13 @@ public class Line {
          * 
          * 
          */
-        /*
-         * Utils.isCCW(this.start,l.start,l.end) != Utils.isCCW(this.end,l.start,l.end) 
-         *      && Utils.isCCW(l.start,this.start,this.end) != Utils.isCCW(l.end,this.start,this.end);
-         * 
-         */
-        /*if( Utils.getArea(this.start,l.start,l.end)==0 
-                ||Utils.getArea(this.end,l.start,l.end)==0
-                ||Utils.getArea(l.start,this.start,this.end)==0
-                ||Utils.getArea(l.end,this.start,this.end)==0){
-            return null;
-        }else{*/
-            return this.getPointOfInterSection(l);
-        //}
+            Coordinate2D point = this.getPointOfInterSection(l);
+            if(proper && (this.start.equals(point) || this.end.equals(point)
+                    ||l.start.equals(point)||l.end.equals(point)))
+                return null;
+            else
+                return point;
+                       
     }
     
     public boolean contains(Coordinate2D point){

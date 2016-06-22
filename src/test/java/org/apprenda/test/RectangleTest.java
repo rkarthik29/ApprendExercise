@@ -192,6 +192,16 @@ public class RectangleTest {
         Assert.assertFalse(r2.contains(r1));
     }
     @Test
+    public void testhelpermethodrectangle(){
+        Rectangle r1 = new Rectangle(new Coordinate2D(3, 3),2,2);
+        Rectangle r2 = new Rectangle(new Coordinate2D(4, 4),3,3);
+        Assert.assertFalse(r1.isAdjacent(r2));
+        Assert.assertTrue(r1.isIntesecting(r2));
+        Assert.assertTrue(r2.isIntesecting(r1));
+        Assert.assertFalse(r1.contains(r2));
+        Assert.assertFalse(r2.contains(r1));
+    }
+    @Test
     public void testPentagoncontainrectangle(){
         Rectangle r1 = new Rectangle(new Coordinate2D(4, 2),new Coordinate2D(4, 7)
                 ,new Coordinate2D(7, 2),new Coordinate2D(7, 7));
@@ -204,6 +214,4 @@ public class RectangleTest {
         Polygon p2 = new Polygon(coordinates);
         Assert.assertTrue(p2.contains(r1));
     }
-    
-    
 }

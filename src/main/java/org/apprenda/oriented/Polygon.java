@@ -165,7 +165,7 @@ public class Polygon {
         ArrayList<Line> edgesA=this.getEdges(pointsA);
         for(Line edgeA:edgesA){
             for(Line edgeB:edgesB){
-               Coordinate2D point= edgeA.intersects(edgeB);
+               Coordinate2D point= edgeA.intersects(edgeB,false);
                //if edge A returns a intersection point with edgeB and the point does not already exists
                //then add it to list on intersection points.
                /*
@@ -202,6 +202,7 @@ public class Polygon {
         pointsB.addAll(b.getCoordinates());
         ArrayList<Line> edgesB=this.getEdges(pointsB);
         ArrayList<Line> edgesA=this.getEdges(pointsA);
+        boolean adjacent=false;
         for(Line edgeA:edgesA){
             for(Line edgeB:edgesB){
                //System.out.println(edgeA+"--"+edgeB);
@@ -221,10 +222,14 @@ public class Polygon {
                */
                 
               if( edgeA.colinear(edgeB))
-                  return true;
+                  adjacent=true;
+              else{
+                  if(edgeA.intersects(edgeB,true)!=null)
+                      adjacent=false;
+              }
             }
         }
-        return false;
+        return adjacent;
     }
     
     public boolean equals(Object a){
