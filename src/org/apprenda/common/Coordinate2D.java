@@ -1,4 +1,4 @@
-package org.apprenda.aligned;
+package org.apprenda.common;
 
 public class Coordinate2D implements Comparable<Coordinate2D>,Cloneable{
     private long x;
@@ -33,7 +33,7 @@ public class Coordinate2D implements Comparable<Coordinate2D>,Cloneable{
     public int compareTo(Coordinate2D o) {
         // TODO Auto-generated method stub
         if(this.y==o.y){
-            return (int)(this.x-o.x);
+            return (int)(o.x-this.x);
         }else{
             return (int)(this.y-o.y);
         }

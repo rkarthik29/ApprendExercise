@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Stack;
 
+import org.apprenda.common.Coordinate2D;
 import org.apprenda.common.Utils;
 
 public class Rectangle {

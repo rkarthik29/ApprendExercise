@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Stack;
 
-import org.apprenda.aligned.Coordinate2D;
+import org.apprenda.common.Coordinate2D;
 import org.apprenda.common.Utils;
 
 public class Polygon {
@@ -94,16 +94,23 @@ public class Polygon {
             ArrayList<Coordinate2D> points2d= new ArrayList<Coordinate2D>();
             points2d.addAll(this.getCoordinates());
             Polygon polygon1=this.getConvexHull(points2d);
-            System.out.println(polygon1);
+            //System.out.println(polygon1);
             points2d.clear();
             points2d.addAll(this.getCoordinates());
             points2d.addAll(rect.getCoordinates());
             Polygon polygon2=this.getConvexHull(points2d);
-            System.out.println(polygon2);
+            //System.out.println(polygon2);
             return polygon1.equals(polygon2);
         }
 
     }
+    
+    /*public final Coordinate2D[] intersects(Polygon a){
+        ArrayList<Coordinate2D> points2d= new ArrayList<Coordinate2D>();
+        points2d.addAll(this.getCoordinates());
+        Polygon polygon1=this.getEdges(points2d);
+        
+    }*/
     
     public boolean equals(Polygon a){
         if(a==null){

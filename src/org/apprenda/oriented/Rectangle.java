@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Stack;
 
-import org.apprenda.aligned.Coordinate2D;
+import org.apprenda.common.Coordinate2D;
 import org.apprenda.common.Utils;
 
 public class Rectangle extends Polygon {
@@ -34,7 +34,7 @@ public class Rectangle extends Polygon {
         //Rectangle r2 = new Rectangle(new Coordinate2D(1, 2),new Coordinate2D(2, 3)
         //        ,new Coordinate2D(2, 0),new Coordinate2D(3,1));
         
-        if(r1.contains(r2))
+        if(r2.contains(r1))
             System.out.print("r1 contains r2");
         else
             System.out.print("r1 does not contain r2");
